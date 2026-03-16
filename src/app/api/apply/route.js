@@ -136,7 +136,7 @@ export async function POST(request) {
     } catch (err) {
       console.error("이메일 발송 실패:", err.message);
       return NextResponse.json(
-        { error: "이메일 알림 발송에 실패했습니다. (환경변수 설정 또는 비밀번호를 다시 확인해주세요.)" },
+        { error: `서버 측 이메일 에러 발송: ${err.message}` },
         { status: 500 }
       );
     }
