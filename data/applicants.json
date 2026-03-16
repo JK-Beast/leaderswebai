@@ -1,0 +1,51 @@
+[
+  {
+    "name": "초기멤버1",
+    "role": "테스트",
+    "phone": "000-0000-0001",
+    "task": "초기 데이터",
+    "date": "2026-03-15T00:00:00.000Z"
+  },
+  {
+    "name": "초기멤버2",
+    "role": "테스트",
+    "phone": "000-0000-0002",
+    "task": "초기 데이터",
+    "date": "2026-03-15T00:00:00.000Z"
+  },
+  {
+    "name": "초기멤버3",
+    "role": "테스트",
+    "phone": "000-0000-0003",
+    "task": "초기 데이터",
+    "date": "2026-03-16T00:00:00.000Z"
+  },
+  {
+    "name": "asdf",
+    "role": "asdf",
+    "phone": "asdf",
+    "task": "asdf",
+    "date": "2026-03-16T10:25:07.157Z"
+  },
+  {
+    "name": "김춘추",
+    "role": "아아",
+    "phone": "010220222030",
+    "task": "afskdf",
+    "date": "2026-03-16T14:20:16.863Z"
+  },
+  {
+    "name": "asdf",
+    "role": "asdf",
+    "phone": "asdfasdf",
+    "task": "asdfasdf",
+    "date": "2026-03-16T15:10:25.765Z"
+  },
+  {
+    "name": "asdfasdfasdf",
+    "role": "asdfasdfasdf",
+    "phone": "asdfasdfasdf",
+    "task": "asdfasdfasdf",
+    "date": "2026-03-16T15:20:15.349Z"
+  }
+]
