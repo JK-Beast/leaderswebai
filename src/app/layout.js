@@ -2,15 +2,21 @@ import "./globals.css";
 
 export const metadata = {
   metadataBase: new URL("https://risegen.kr"),
-  title: "LEADERS AI LABS — 1기 모집",
-  description: "대전 한정 1기 100명 선착순 모집. Gemini + Workflow 기반 AI 실무 교육.",
+  title: "리더스 AI 랩 (LEADERS AI LABS) — 1기 모집",
+  description: "대전 최초 AI 실무 커뮤니티. Gemini + Workflow 기반 AI 실무 교육 1기 선착순 모집.",
   openGraph: {
-    title: "RiseGen - 새로운 세대를 위한 AI 솔루션",
-    description: "RiseGen의 혁신적인 맞춤형 AI 서비스를 지금 만나보세요.",
+    title: "리더스 AI 랩 — 1기 멤버 모집",
+    description: "대전 한정 1기 100명 선착순 모집. 당신의 업무를 AI로 혁신하세요.",
     url: "https://risegen.kr",
+    siteName: "리더스 AI 랩",
+    locale: "ko_KR",
+    type: "website",
     images: [
       {
-        url: "https://risegen.kr/images/thumbnail.png",
+        url: "/images/thumbnail.png",
+        width: 1200,
+        height: 630,
+        alt: "LEADERS AI LABS 1기 모집",
       },
     ],
   },
