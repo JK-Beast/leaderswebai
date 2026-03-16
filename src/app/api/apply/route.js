@@ -44,8 +44,8 @@ async function sendEmail(applicant, currentCount) {
   const to = process.env.NOTIFY_EMAIL;
 
   if (!user || !pass || !to) {
-    console.warn("이메일 환경변수가 설정되지 않아 알림을 건너뜁니다.");
-    return false;
+    console.error("환경변수 누락:", { user: !!user, pass: !!pass, to: !!to });
+    throw new Error("환경변수(EMAIL_USER, EMAIL_PASS, NOTIFY_EMAIL)가 설정되지 않았습니다.");
   }
 
   // 확실한 전송을 위해 명시적인 옵션 사용
