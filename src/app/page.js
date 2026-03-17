@@ -543,10 +543,16 @@ function ApplicationSection() {
 
   // 실시간 신청자 수 가져오기
   useEffect(() => {
-    fetch("/api/count")
-      .then((r) => r.json())
-      .then((d) => setLiveCount(d.count))
-      .catch(() => setLiveCount(3));
+    const getCount = () => {
+      fetch("/api/count")
+        .then((r) => r.json())
+        .then((d) => setLiveCount(d.count))
+        .catch(() => setLiveCount(26));
+    };
+    
+    getCount(); // 초기 실행
+    const interval = setInterval(getCount, 30000); // 30초마다 업데이트
+    return () => clearInterval(interval);
   }, []);
 
   const handleSubmit = async (e) => {

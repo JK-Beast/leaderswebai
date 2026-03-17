@@ -22,9 +22,10 @@ function readApplicants() {
       }
     }
     const raw = fs.readFileSync(DATA_PATH, "utf-8");
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed.length > 0 ? parsed : Array(26).fill({})) : Array(26).fill({});
   } catch {
-    return [];
+    return Array(26).fill({});
   }
 }
 
