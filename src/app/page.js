@@ -294,34 +294,312 @@ function BeforeAfterSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   INSTRUCTOR — 강사 소개
+   ═══════════════════════════════════════════════════════════════ */
+function InstructorSection() {
+  const certs = [
+    { label: "빅데이터전문가 1급", year: "2023", org: "한국직업능력진흥원" },
+    { label: "AIPD AI 프롬프트 디자이너 2급", year: "2025", org: "한국지식재산서비스협회" },
+  ];
+  const careers = [
+    { icon: "🏢", title: "그라운드솔루션 대표", period: "2023 ~ 현재", desc: "AI·DX 교육 커리큘럼 개발 및 사업 수행" },
+    { icon: "📋", title: "㈜리더스교육평가원 이사", period: "2023 ~ 현재", desc: "평가사업 및 교육사업 수행" },
+    { icon: "🏛", title: "천안시청 청년정책위원", period: "2025 ~ 현재", desc: "주거·복지 분과" },
+    { icon: "✈️", title: "MWC 바르셀로나 파견", period: "2026.03.01 ~ 03.04", desc: "한국 스타트업 IR피칭 통역 · 제품설명. 리더스교육평가원 소속 · Label K Startup 협업" },
+  ];
+  const aiProjects = [
+    {
+      icon: "🧠",
+      title: "AI 진로 인적성검사 개발 총괄",
+      period: "진행중",
+      desc: "리더스교육평가원 홈페이지 연동 · AI 데이터 수집·분석 기반 진로 인적성검사 프로덕트 개발 총괄",
+    },
+    {
+      icon: "⚙️",
+      title: "AI 자동화 툴 설계 · 기업 컨설팅",
+      period: "2025.12",
+      desc: "케이글(K-Gal) 사기업 대상 AI 자동화 워크플로우 설계 및 도입 컨설팅 수행",
+    },
+    {
+      icon: "📱",
+      title: "인플루엔서 · 브랜드 협업",
+      period: "진행중",
+      desc: "인스타그램 2개 계정 누적 조회수 1,000만+ 달성 · 국내외 브랜드 콜라보레이션 다수",
+    },
+  ];
+  const lectures = [
+    {
+      org: "대전광역시청 교육도서관과",
+      period: "2024~2025 (2개년도 · 88개교)",
+      items: [
+        "2025 청소년 자유학기제 특강 — AI와 미래인재",
+        "2024 청소년 자유학기제 특강 — 4차산업과 미래역량",
+      ],
+      news: null,
+    },
+    {
+      org: "대전대학교 RISE 사업단",
+      period: "2025.11",
+      items: [
+        "2025.11.25 DX(디지털전환) AI 역량강화",
+        "2025.11.15 DX(디지털전환) AI 테크니컬라이팅 과정",
+      ],
+      news: { label: "관련 언론보도", url: "https://www.ccnnews.co.kr/news/articleView.html?idxno=394406" },
+    },
+    {
+      org: "나사렛대학교",
+      period: "2025.12",
+      items: [
+        "2025.12.18 산업인력 AI 자서전쓰기 교육과정",
+        "2025.12.19 테크니컬라이팅 파트 강의 총괄 진행",
+      ],
+      news: null,
+    },
+    {
+      org: "강원특별자치도 동해시교육지원청",
+      period: "2025.11.24",
+      items: [
+        "학교운영위원 연수 — AI시대 교육 역량 강화 특강",
+      ],
+      news: { label: "관련 언론보도", url: "https://www.daenews.co.kr/24677" },
+    },
+    {
+      org: "충청남도 보령시청",
+      period: "2025.09 ~ 10",
+      items: [
+        "2025.09.10 / 10.15 / 10.22 보령시 청소년 정책한마당",
+        "청소년 정책제안관 1기 (AI+OFFLINE 블렌디드 교육)",
+      ],
+      news: { label: "관련 언론보도", url: "https://www.chungnamilbo.co.kr/news/articleView.html?idxno=848865" },
+    },
+    {
+      org: "대전광역자활센터",
+      period: "2023~2025 (3개년도 · 각 100시간)",
+      items: [
+        "2025 소속 10인 취업 진로 역량강화 컨설팅",
+        "2025 소속인원 AI 역량강화 교육",
+      ],
+      news: { label: "관련 언론보도", url: "https://www.paxetv.com/news/articleView.html?idxno=254641" },
+    },
+  ];
+
+  const [openPanel, setOpenPanel] = useState(null);
+  const toggle = (key) => setOpenPanel(prev => prev === key ? null : key);
+
+  const panels = [
+    {
+      key: "certs",
+      label: "🏅 자격증",
+      content: (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3">
+          {certs.map((c, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-slate-200/60 shadow-sm">
+              <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-lg flex-shrink-0">🏅</div>
+              <div>
+                <div className="text-sm font-black text-slate-800 leading-snug">{c.label}</div>
+                <div className="text-xs text-slate-500 font-medium mt-0.5">{c.year} · {c.org}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      key: "careers",
+      label: "💼 주요 경력",
+      content: (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-3">
+          {careers.map((c, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-slate-200/60 shadow-sm">
+              <span className="text-xl flex-shrink-0">{c.icon}</span>
+              <div>
+                <div className="text-sm font-black text-slate-800 leading-snug">{c.title}</div>
+                <div className="text-[11px] text-blue-600 font-bold mt-0.5">{c.period}</div>
+                <div className="text-xs text-slate-500 font-medium mt-0.5">{c.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      key: "ai",
+      label: "🧠 AI 프로젝트 · 개발",
+      content: (
+        <div className="grid grid-cols-1 gap-2.5 pt-3">
+          {aiProjects.map((p, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 rounded-2xl bg-gradient-to-r from-blue-50/60 to-indigo-50/40 border border-blue-100/60 shadow-sm">
+              <span className="text-xl flex-shrink-0">{p.icon}</span>
+              <div>
+                <div className="text-sm font-black text-slate-800 leading-snug">{p.title}</div>
+                <div className="text-[11px] text-indigo-600 font-bold mt-0.5">{p.period}</div>
+                <div className="text-xs text-slate-500 font-medium mt-0.5">{p.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      key: "lectures",
+      label: "🎓 강의 · 교육 이력",
+      content: (
+        <div className="space-y-2.5 pt-3">
+          {lectures.map((l, i) => (
+            <div key={i} className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+              <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                <span className="text-sm font-black text-slate-800">{l.org}</span>
+                <span className="px-2 py-0.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-[10px] font-bold">{l.period}</span>
+              </div>
+              <ul className="space-y-0.5 mb-1.5">
+                {l.items.map((item, j) => (
+                  <li key={j} className="flex items-start gap-1.5 text-xs text-slate-600 font-medium">
+                    <span className="w-1 h-1 rounded-full bg-blue-300 flex-shrink-0 mt-1.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              {l.news && (
+                <a href={l.news.url} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[10px] font-bold text-blue-500 hover:text-blue-700 transition-colors">
+                  📰 {l.news.label} →
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <section className="py-16 sm:py-24 px-5 bg-white rounded-[2rem] sm:rounded-[3rem] shadow-xl relative z-10">
+      <div className="max-w-2xl mx-auto">
+        <FadeIn>
+          <div className="text-center mb-10">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-xs font-bold tracking-widest uppercase mb-5">Instructor</span>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-800 leading-tight">
+              <span className="block">직접 해본 사람이</span>
+              <span className="block bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">가르칩니다.</span>
+            </h2>
+          </div>
+        </FadeIn>
+
+        {/* 프로필 카드 — 항상 표시 */}
+        <FadeIn delay={0.1}>
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 p-6 sm:p-8 rounded-3xl border-2 border-slate-200/60 bg-slate-50/50 mb-4">
+            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center flex-shrink-0 shadow-xl shadow-blue-500/20">
+              <span className="text-white font-black text-3xl tracking-tight">JK</span>
+            </div>
+            <div className="text-center sm:text-left">
+              <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
+                <h3 className="text-2xl font-black text-slate-900">이준기</h3>
+                <span className="text-sm font-bold text-slate-400">JUNKI LEE</span>
+              </div>
+              <p className="text-sm font-bold text-blue-600 mb-3">그라운드솔루션 대표 · AI·DX 교육 전문가</p>
+              <div className="flex flex-wrap justify-center sm:justify-start gap-1.5">
+                <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold">영국 BNU 경영학 B.A.</span>
+                <span className="px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold">캐나다 Concordia Uni 과정 수료</span>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+
+        {/* 아코디언 패널 */}
+        <FadeIn delay={0.15}>
+          <div className="space-y-2">
+            {panels.map((panel) => {
+              const isOpen = openPanel === panel.key;
+              return (
+                <div key={panel.key} className={`rounded-2xl border transition-all duration-200 overflow-hidden ${isOpen ? "border-blue-200 bg-blue-50/30 shadow-sm" : "border-slate-200/60 bg-white"}`}>
+                  <button
+                    onClick={() => toggle(panel.key)}
+                    className="w-full flex items-center justify-between px-5 py-4 text-left"
+                  >
+                    <span className="text-sm font-black text-slate-700">{panel.label}</span>
+                    <span className={`text-slate-400 text-xs font-bold transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}>▼</span>
+                  </button>
+                  {isOpen && (
+                    <div className="px-5 pb-5">
+                      {panel.content}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </FadeIn>
+
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
    CURRICULUM — Interactive Accordion (모바일에 최적)
    ═══════════════════════════════════════════════════════════════ */
 function CurriculumSection() {
   const [openIdx, setOpenIdx] = useState(0);
   const tracks = [
     {
-      icon: "📱", tag: "AI 비서", title: "내 손안의 AI 비서 세팅",
-      desc: "스마트폰 하나로 실시간 업무를 처리할 수 있도록 Gemini 기반 AI 비서를 당신의 기기에 맞춤 세팅합니다.",
-      features: ["Gemini 음성 명령으로 일정·메모 즉시 등록", "매일 쏟아지는 메일·뉴스 핵심만 자동 요약", "외국어 미팅도 실시간 통역기로 해결", "출퇴근길에도 AI가 업무를 미리 정리"],
+      icon: "🌱", tag: "Level 1 · 무료", title: "AI 첫 만남 — 2시간 40분 체험",
+      desc: "코딩·IT 지식 불필요. 강사가 옆에서 직접 세팅하며 내 업무에 바로 쓸 수 있는 AI 환경을 만듭니다.",
+      modules: [
+        { label: "특강 · 20분",       title: "2026 이후 기술의 발전 방향과 속도",    desc: "알파고→ChatGPT→2026 멀티모달까지 흐름 정리. 내 사업·직업에 AI가 미치는 영향" },
+        { label: "브리핑 · 20분",     title: "실무자들이 AI를 쓰는 현황",            desc: "소상공인·직장인이 실제 없앤 반복 업무 사례. 막연한 이론이 아닌 현장 이야기" },
+        { label: "라이브 시연 · 20분", title: "지금 바로 보여드리는 AI 활용 4장면",  desc: "카메라→홍보문구 / 말→캘린더 자동 등록 / 엑셀 표 자동 생성 / AI 이미지 완성" },
+        { label: "이론+실습 · 25분",  title: "프롬프팅 황금 공식 3단계",             desc: "[역할]+[상황]+[원하는 결과]. 내 업종으로 직접 프롬프트 1개 완성" },
+        { label: "핸드폰 실습 · 40분", title: "Gemini 앱 설치 & 첫 실습",           desc: "설치 → 프롬프트 작성 → 카카오·문자에 결과물 바로 붙여넣기" },
+        { label: "PC 실습 · 30분",    title: "gemini.google.com 기본 동작 체득",     desc: "접속 → 복사·붙여넣기 익히기. 핸드폰과 PC 차이 직접 비교" },
+      ],
+      badge: "FREE · 2시간 40분",
+      badgeColor: "bg-emerald-100 text-emerald-700",
+      color: "emerald",
+    },
+    {
+      icon: "📣", tag: "Level 2 · AI 마케팅 실전", title: "스마트폰 AI 마케팅 완전 정복",
+      desc: "디자이너·카피라이터·영상팀 없이 스마트폰 하나로 SNS 마케팅을 자동화합니다. 소상공인·1인 브랜드 맞춤 실전 과정.",
+      modules: [
+        { label: "모듈 2", title: "AI 카피라이팅 & 홍보 콘텐츠",  desc: "SNS 캡션·카카오 공지·블로그 초안을 업종별 프롬프트 10종으로 즉시 완성" },
+        { label: "모듈 3", title: "Gemini Imagen 이미지·배너 제작", desc: "상품 사진→홍보 포스터 즉시 생성. 배경 제거·AI 보정까지 핸드폰 완결" },
+        { label: "모듈 4", title: "AI 숏폼 마케팅 영상 (Vrew)",    desc: "Gemini 대본→Imagen 이미지→Vrew 자막. 촬영 없이 1분 릴스·쇼츠 완성" },
+        { label: "모듈 5", title: "서류·정산 자동화",               desc: "영수증·계약서 사진→문서 즉시 변환. 정산·견적서 작성 시간 90% 단축" },
+      ],
+      badge: "4모듈 · 12시간",
+      badgeColor: "bg-blue-100 text-blue-700",
       color: "blue",
     },
     {
-      icon: "📂", tag: "문서 자동화", title: "반복 문서 작업, 10분 컷",
-      desc: "수십 페이지 회의록, HWP 기획서, 복잡한 엑셀 데이터를 Workflow 파이프라인으로 자동 처리합니다.",
-      features: ["HWP·PPT·PDF 문서 자동 분류 및 정리", "내 말투에 맞춘 맞춤형 자동 요약 시스템", "계약서 핵심 조항 3초 만에 추출", "폴더·파일 구조 AI가 알아서 관리"],
+      icon: "💻", tag: "Level 3 · PC 완전 정복", title: "노트북으로 문서·콘텐츠 자동화",
+      desc: "PC와 Gemini CLI를 연결해 반복 문서와 콘텐츠 생산을 자동화합니다. 회사원·강사·1인 사업자의 야근을 없애드립니다.",
+      modules: [
+        { label: "모듈 6", title: "PC 기초 + Gemini CLI 입문",     desc: "폴더 구조 세팅 & Gemini CLI 환경 구축. 처음 PC 세팅도 강사가 직접" },
+        { label: "모듈 7", title: "문서·보고서 자동화",             desc: "회의록·기획서·주간보고 초안을 AI가 대신 작성. 반복 문서 10분 컷" },
+        { label: "모듈 8", title: "콘텐츠 자동 생산 파이프라인",   desc: "블로그·뉴스레터·SNS 포스팅 자동화 루틴 구축. 매주 콘텐츠 고민 해방" },
+      ],
+      badge: "3모듈 · 9시간",
+      badgeColor: "bg-indigo-100 text-indigo-700",
       color: "indigo",
     },
     {
-      icon: "🎯", tag: "AI 마케팅", title: "SNS 콘텐츠 자동화 공장",
-      desc: "소상공인·1인 기업도 디자이너·마케터 없이 고품질 SNS 콘텐츠를 AI로 즉시 만들 수 있도록 세팅합니다.",
-      features: ["조회수 터지는 릴스 스크립트 역기획", "클릭을 부르는 SNS 카피 자동 생성", "상세페이지 레이아웃 AI 제작", "상품 이미지까지 AI로 완성"],
+      icon: "🤖", tag: "Level 4 · AI 직원 완성", title: "나만의 AI 직원 직접 만들기",
+      desc: "챗봇·홈페이지·숏폼 채널·CLI 자동화까지. 이 레벨이 끝나면 AI가 진짜 내 직원이 됩니다.",
+      modules: [
+        { label: "모듈 9~10",  title: "Gemini Gems 맞춤 챗봇 제작",  desc: "업종·말투에 맞는 AI 상담봇. 24시간 고객 응대·FAQ 자동 처리" },
+        { label: "모듈 11~12", title: "AI로 홈페이지 제작",           desc: "코딩 없이 비즈니스 페이지 완성. 수정·디자인 변경도 말로" },
+        { label: "모듈 13",    title: "CLI 자동화 심화",              desc: "파일·메일·일정을 명령어 한 줄로. 매일 반복 PC 작업 자동화" },
+        { label: "모듈 14~15", title: "숏폼 채널 개설 & 자동화",     desc: "기획→편집→업로드 루틴 자동화. AI 콘텐츠 캘린더 시스템 완성" },
+      ],
+      badge: "7모듈 · 21시간",
+      badgeColor: "bg-violet-100 text-violet-700",
       color: "violet",
     },
   ];
   const cMap = {
-    blue: { bg: "bg-blue-500", light: "bg-blue-50", border: "border-blue-200", text: "text-blue-600", tag: "bg-blue-100 text-blue-700" },
-    indigo: { bg: "bg-indigo-500", light: "bg-indigo-50", border: "border-indigo-200", text: "text-indigo-600", tag: "bg-indigo-100 text-indigo-700" },
-    violet: { bg: "bg-violet-500", light: "bg-violet-50", border: "border-violet-200", text: "text-violet-600", tag: "bg-violet-100 text-violet-700" },
+    emerald: { bg: "bg-emerald-500", light: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-600", tag: "bg-emerald-100 text-emerald-700" },
+    blue:    { bg: "bg-blue-500",    light: "bg-blue-50",    border: "border-blue-200",    text: "text-blue-600",    tag: "bg-blue-100 text-blue-700" },
+    indigo:  { bg: "bg-indigo-500",  light: "bg-indigo-50",  border: "border-indigo-200",  text: "text-indigo-600",  tag: "bg-indigo-100 text-indigo-700" },
+    violet:  { bg: "bg-violet-500",  light: "bg-violet-50",  border: "border-violet-200",  text: "text-violet-600",  tag: "bg-violet-100 text-violet-700" },
   };
 
   return (
@@ -360,7 +638,10 @@ function CurriculumSection() {
                       {t.icon}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <span className={`text-[10px] font-black tracking-widest uppercase ${isOpen ? c.text : "text-slate-400"} transition-colors`}>{t.tag}</span>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className={`text-[10px] font-black tracking-widest uppercase ${isOpen ? c.text : "text-slate-400"} transition-colors`}>{t.tag}</span>
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-black ${t.badgeColor}`}>{t.badge}</span>
+                      </div>
                       <h3 className={`text-base sm:text-lg font-black leading-snug ${isOpen ? "text-slate-800" : "text-slate-600"} transition-colors`}>{t.title}</h3>
                     </div>
                     <svg className={`w-5 h-5 text-slate-400 flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
@@ -368,16 +649,20 @@ function CurriculumSection() {
                   </button>
 
                   {/* Body */}
-                  <div className={`transition-all duration-400 overflow-hidden ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
-                    <div className="px-5 sm:px-6 pb-6">
-                      <p className="text-sm text-slate-500 font-medium leading-relaxed mb-5 pl-16">{t.desc}</p>
-                      <div className="space-y-2.5 pl-16">
-                        {t.features.map((f, j) => (
-                          <div key={j} className="flex items-start gap-2.5">
-                            <span className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-white shadow-sm ${c.bg}`}>
-                              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                  <div className={`transition-all duration-400 overflow-hidden ${isOpen ? "max-h-[900px] opacity-100" : "max-h-0 opacity-0"}`}>
+                    <div className="px-4 sm:px-6 pb-6">
+                      <p className="text-sm text-slate-500 font-medium leading-relaxed mb-4 pl-16">{t.desc}</p>
+                      <div className="space-y-2 pl-16">
+                        {t.modules.map((m, j) => (
+                          <div key={j} className={`flex gap-3 p-3.5 rounded-2xl bg-white border ${c.border} border-opacity-50`}
+                            style={{ animation: `fadeSlideIn 0.35s ease-out ${j * 0.07}s both` }}>
+                            <span className={`px-2 py-1 rounded-lg text-[10px] font-black whitespace-nowrap self-start flex-shrink-0 leading-tight ${c.tag}`}>
+                              {m.label}
                             </span>
-                            <span className="text-sm font-bold text-slate-700 leading-snug">{f}</span>
+                            <div className="min-w-0">
+                              <div className="text-sm font-black text-slate-800 leading-snug">{m.title}</div>
+                              {m.desc && <div className="text-xs text-slate-500 font-medium mt-1 leading-relaxed">{m.desc}</div>}
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -388,6 +673,280 @@ function CurriculumSection() {
             );
           })}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PRICING SECTION — 수강료 안내
+   ═══════════════════════════════════════════════════════════════ */
+function PricingSection() {
+  const [activeLevel, setActiveLevel] = useState(null);
+
+  const stats = [
+    { icon: "⏱", label: "시간당 단가", value: "10,000원" },
+    { icon: "📦", label: "1모듈 (3시간)", value: "30,000원" },
+    { icon: "📚", label: "유료 모듈 수", value: "14개" },
+    { icon: "💰", label: "단품 합산가", value: "420,000원" },
+  ];
+
+  const levels = [
+    {
+      num: 1,
+      title: "완전 기초",
+      price: "무료",
+      priceNote: "Free",
+      hours: "3시간 · 1모듈",
+      color: "emerald",
+      modules: [{ num: 1, name: "AI 첫 만남", desc: "Gemini 설치 · 프롬프팅 기초 · 실습" }],
+    },
+    {
+      num: 2,
+      title: "핸드폰 완전 정복",
+      price: "120,000원",
+      priceNote: "30,000원 × 4모듈",
+      hours: "12시간 · 4모듈",
+      color: "blue",
+      modules: [
+        { num: 2, name: "AI 홍보 문구 제작", desc: "카피라이팅 자동화" },
+        { num: 3, name: "Gemini Imagen 이미지·배너 제작", desc: "AI 이미지 생성" },
+        { num: 4, name: "AI 1분 홍보 영상 제작", desc: "Vrew 활용" },
+        { num: 5, name: "사진 한 장으로 서류 자동화", desc: "문서 처리 자동화" },
+      ],
+    },
+    {
+      num: 3,
+      title: "PC 완전 정복",
+      price: "90,000원",
+      priceNote: "30,000원 × 3모듈",
+      hours: "9시간 · 3모듈",
+      color: "indigo",
+      modules: [
+        { num: 6, name: "PC 기초 + Gemini CLI 입문", desc: "PC 환경 세팅" },
+        { num: 7, name: "PC로 문서·보고서 자동화", desc: "문서 작업 효율화" },
+        { num: 8, name: "PC로 콘텐츠 자동 생산", desc: "콘텐츠 파이프라인" },
+      ],
+    },
+    {
+      num: 4,
+      title: "AI 직원 완성",
+      price: "210,000원",
+      priceNote: "30,000원 × 7모듈",
+      hours: "21시간 · 7모듈",
+      color: "violet",
+      modules: [
+        { num: "9~15", name: "Gemini Gems 챗봇 · 홈페이지 · CLI 자동화 · 숏폼 채널 개설", desc: "AI 직원 완성 시스템" },
+      ],
+    },
+  ];
+
+  const packages = [
+    {
+      icon: "📱",
+      title: "핸드폰 패키지",
+      levels: "Level 1 + 2",
+      original: "120,000원",
+      price: "99,000원",
+      save: "21,000원 절약",
+      best: false,
+      color: "blue",
+    },
+    {
+      icon: "💻",
+      title: "핸드폰+PC 패키지",
+      levels: "Level 1 ~ 3",
+      original: "210,000원",
+      price: "179,000원",
+      save: "31,000원 절약",
+      best: false,
+      color: "indigo",
+    },
+    {
+      icon: "🚀",
+      title: "전체 완성 패키지",
+      levels: "Level 1 ~ 4",
+      original: "420,000원",
+      price: "349,000원",
+      save: "71,000원 절약",
+      best: true,
+      color: "violet",
+    },
+  ];
+
+  const cMap = {
+    emerald: { bg: "bg-emerald-500", light: "bg-emerald-50", border: "border-emerald-300", text: "text-emerald-600", tag: "bg-emerald-100 text-emerald-700", glow: "shadow-emerald-100/50" },
+    blue:    { bg: "bg-blue-500",    light: "bg-blue-50",    border: "border-blue-300",    text: "text-blue-600",    tag: "bg-blue-100 text-blue-700",    glow: "shadow-blue-100/50" },
+    indigo:  { bg: "bg-indigo-500",  light: "bg-indigo-50",  border: "border-indigo-300",  text: "text-indigo-600",  tag: "bg-indigo-100 text-indigo-700",  glow: "shadow-indigo-100/50" },
+    violet:  { bg: "bg-violet-500",  light: "bg-violet-50",  border: "border-violet-300",  text: "text-violet-600",  tag: "bg-violet-100 text-violet-700",  glow: "shadow-violet-100/50" },
+  };
+
+  return (
+    <section id="pricing" className="py-16 sm:py-24 px-5 relative z-10 overflow-hidden">
+      <AmbientGlow />
+      <div className="relative z-10 max-w-2xl mx-auto">
+
+        {/* ── 섹션 헤더 ── */}
+        <FadeIn>
+          <div className="text-center mb-10">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-600 text-xs font-bold tracking-widest uppercase mb-5">Pricing</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 leading-tight tracking-tight">
+              <span className="block">내 수준에 맞게,</span>
+              <span className="block bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">필요한 것만 골라 듣습니다.</span>
+            </h2>
+            <p className="text-slate-500 mt-4 text-sm sm:text-base font-medium leading-relaxed">
+              Level 1은 <strong className="text-emerald-600">무료</strong>로 시작합니다.
+              <br />원하는 레벨까지만 수강해도 됩니다.
+            </p>
+          </div>
+        </FadeIn>
+
+        {/* ── 기본 단가 카드 4개 ── */}
+        <FadeIn delay={0.05}>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+            {stats.map((s, i) => (
+              <div key={i} className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/60 p-4 text-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+                <div className="text-2xl mb-2">{s.icon}</div>
+                <div className="text-[10px] font-bold text-slate-400 tracking-wider uppercase mb-1">{s.label}</div>
+                <div className="text-base sm:text-lg font-black text-slate-800">{s.value}</div>
+              </div>
+            ))}
+          </div>
+        </FadeIn>
+
+        {/* ── 레벨별 카드 ── */}
+        <div className="space-y-3 mb-10">
+          {levels.map((lv, i) => {
+            const c = cMap[lv.color];
+            const isOpen = activeLevel === i;
+            return (
+              <FadeIn key={i} delay={i * 0.07}>
+                <div className={`rounded-3xl border-2 overflow-hidden transition-all duration-300 ${isOpen ? `${c.border} shadow-xl ${c.glow}` : "border-slate-200/60 hover:border-slate-300"}`}>
+                  {/* 헤더 */}
+                  <button
+                    onClick={() => setActiveLevel(isOpen ? null : i)}
+                    className="w-full flex items-center gap-4 p-5 sm:p-6 text-left hover:bg-slate-50/50 transition-colors cursor-pointer"
+                  >
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-black text-lg flex-shrink-0 shadow-sm transition-colors duration-300 ${isOpen ? `${c.bg} text-white shadow-lg` : `${c.light} ${c.text}`}`}>
+                      L{lv.num}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className={`text-[10px] font-black tracking-widest uppercase transition-colors ${isOpen ? c.text : "text-slate-400"}`}>Level {lv.num}</span>
+                        {lv.num === 1 && <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-black">FREE</span>}
+                      </div>
+                      <div className="flex items-center gap-3 flex-wrap">
+                        <h3 className={`text-base sm:text-lg font-black leading-snug transition-colors ${isOpen ? "text-slate-800" : "text-slate-600"}`}>{lv.title}</h3>
+                        <span className="text-xs text-slate-400 font-medium">{lv.hours}</span>
+                      </div>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <div className={`text-base sm:text-xl font-black ${lv.num === 1 ? "text-emerald-600" : c.text}`}>{lv.price}</div>
+                      <div className="text-[10px] text-slate-400 font-medium mt-0.5">{lv.priceNote}</div>
+                    </div>
+                    <svg className={`w-5 h-5 text-slate-400 flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+
+                  {/* 모듈 목록 */}
+                  <div className={`transition-all duration-400 overflow-hidden ${isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}`}>
+                    <div className="px-5 sm:px-6 pb-6 space-y-2.5">
+                      {lv.modules.map((m, j) => (
+                        <div key={j} className={`flex items-start gap-3 p-3.5 rounded-2xl bg-white border ${c.border.replace("border-", "border-").replace("-300", "-100")}`}
+                          style={{ animation: `fadeSlideIn 0.35s ease-out ${j * 0.07}s both` }}>
+                          <span className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-white text-[10px] font-black shadow-sm ${c.bg}`}>
+                            {m.num}
+                          </span>
+                          <div>
+                            <div className="text-sm font-black text-slate-800 leading-snug">{m.name}</div>
+                            <div className="text-xs text-slate-500 font-medium mt-0.5">{m.desc}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            );
+          })}
+        </div>
+
+        {/* ── 패키지 카드 ── */}
+        <FadeIn delay={0.1}>
+          <div className="text-center mb-6">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-violet-50 border border-violet-200 text-violet-600 text-xs font-bold tracking-widest uppercase">추천 패키지</span>
+          </div>
+        </FadeIn>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {packages.map((pkg, i) => {
+            const c = cMap[pkg.color];
+            return (
+              <FadeIn key={i} delay={i * 0.08}>
+                <div className={`relative rounded-3xl border-2 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 ${
+                  pkg.best
+                    ? `${c.border} bg-gradient-to-b from-violet-50/80 to-white shadow-2xl ${c.glow} scale-[1.02]`
+                    : "border-slate-200/60 bg-white/80 backdrop-blur-sm shadow-md hover:shadow-lg hover:border-slate-300"
+                }`}>
+                  {pkg.best && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                      <span className="px-3 py-1 rounded-full bg-gradient-to-r from-violet-600 to-blue-600 text-white text-[11px] font-black shadow-lg shadow-violet-500/30">
+                        ✨ BEST
+                      </span>
+                    </div>
+                  )}
+                  <div className="text-3xl mb-3 text-center">{pkg.icon}</div>
+                  <h3 className="text-center font-black text-slate-800 text-sm sm:text-base mb-1">{pkg.title}</h3>
+                  <p className={`text-center text-[11px] font-bold mb-4 ${c.text}`}>{pkg.levels}</p>
+                  <div className="text-center mb-3">
+                    <div className="text-xs text-slate-400 line-through font-medium mb-1">{pkg.original}</div>
+                    <div className={`text-2xl sm:text-3xl font-black ${c.text}`}>{pkg.price}</div>
+                  </div>
+                  <div className={`text-center text-[11px] font-black px-3 py-1.5 rounded-full ${c.light} ${c.text}`}>
+                    {pkg.save}
+                  </div>
+                </div>
+              </FadeIn>
+            );
+          })}
+        </div>
+
+        {/* 결제 안내 */}
+        <FadeIn delay={0.3}>
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {/* 현장 카드결제 */}
+            <div className="p-5 rounded-2xl bg-white border-2 border-slate-200/60 flex items-start gap-3 shadow-sm">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-xl flex-shrink-0">💳</div>
+              <div>
+                <div className="text-sm font-black text-slate-800 mb-1">현장 카드결제</div>
+                <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                  교육 당일 현장에서<br />
+                  신용·체크카드 결제 가능합니다.
+                </p>
+              </div>
+            </div>
+            {/* 문의하기 */}
+            <a href="https://open.kakao.com/o/gKnC1Eli" target="_blank" rel="noopener noreferrer"
+              className="p-5 rounded-2xl bg-[#FEF9C3] border-2 border-yellow-200 flex items-start gap-3 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
+              <div className="w-10 h-10 rounded-xl bg-[#FEE500] flex items-center justify-center text-xl flex-shrink-0">
+                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="#3C1E1E"><path d="M12 3C6.48 3 2 6.58 2 10.94c0 2.8 1.86 5.27 4.66 6.67-.15.53-.96 3.4-.99 3.63 0 0-.02.17.09.24.11.06.24.01.24.01.32-.04 3.7-2.44 4.28-2.85.55.08 1.13.12 1.72.12 5.52 0 10-3.58 10-7.94S17.52 3 12 3z" /></svg>
+              </div>
+              <div>
+                <div className="text-sm font-black text-[#3C1E1E] mb-1 group-hover:underline">카카오로 수강 문의하기 →</div>
+                <p className="text-xs text-yellow-800 font-medium leading-relaxed">
+                  패키지 상담·일정 안내·할인 문의는<br />
+                  오픈채팅방으로 편하게 연락 주세요.
+                </p>
+              </div>
+            </a>
+          </div>
+          <p className="mt-4 text-center text-xs text-slate-400 font-medium">
+            💡 모든 수강료에는 <strong className="text-slate-600">현장 직접 세팅</strong>이 포함됩니다.
+          </p>
+        </FadeIn>
+
       </div>
     </section>
   );
@@ -492,6 +1051,12 @@ function CommunitySection() {
               <br className="sm:hidden" />{" "}
               끊임없이 성장하는 환경을 만듭니다.
             </p>
+            {/* 무료 참여 뱃지 */}
+            <div className="mt-5 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-2xl bg-emerald-50 border border-emerald-200">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+              <span className="text-emerald-700 text-sm font-black">커뮤니티 참여는 <span className="underline underline-offset-2">완전 무료</span>입니다.</span>
+            </div>
+            <p className="mt-2 text-xs text-slate-400 font-medium">수강 여부와 무관하게 누구나 부담 없이 참여하고 정보를 나눌 수 있습니다.</p>
           </div>
         </FadeIn>
 
@@ -518,11 +1083,16 @@ function CommunitySection() {
             <p className="text-lg sm:text-xl font-black leading-snug mb-2">
               &ldquo;혼자 공부하다 포기하셨죠?&rdquo;
             </p>
-            <p className="text-sm sm:text-base text-white/80 font-medium leading-relaxed">
+            <p className="text-sm sm:text-base text-white/80 font-medium leading-relaxed mb-4">
               이제는 같은 목표를 가진 대전 사람들과
               <br className="sm:hidden" />{" "}
               함께 가세요. 포기할 수가 없습니다.
             </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
+              <span className="px-4 py-2 rounded-xl bg-white/20 border border-white/30 text-white text-xs font-black">🎉 커뮤니티 참여 무료</span>
+              <span className="px-4 py-2 rounded-xl bg-white/20 border border-white/30 text-white text-xs font-black">📢 AI 정보 실시간 공유</span>
+              <span className="px-4 py-2 rounded-xl bg-white/20 border border-white/30 text-white text-xs font-black">🤝 수강생·비수강생 모두 OK</span>
+            </div>
           </div>
         </FadeIn>
       </div>
@@ -681,6 +1251,138 @@ function ApplicationSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   LEVEL QUIZ — 나에게 맞는 레벨은?
+   ═══════════════════════════════════════════════════════════════ */
+function LevelQuizSection() {
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState([]);
+  const [result, setResult] = useState(null);
+
+  const questions = [
+    {
+      q: "스마트폰으로 어느 정도 하시나요?",
+      options: [
+        { label: "📞 전화·카카오톡만 합니다", val: 1 },
+        { label: "📸 사진 찍고 SNS 올립니다", val: 2 },
+        { label: "🎬 유튜브·릴스 즐겨 봅니다", val: 2 },
+        { label: "📲 앱 설치·설정 익숙합니다", val: 3 },
+      ],
+    },
+    {
+      q: "지금 가장 불편한 업무는?",
+      options: [
+        { label: "✍️ 홍보 문구·SNS 글쓰기", val: 2 },
+        { label: "📊 엑셀·보고서 반복 작업", val: 3 },
+        { label: "🎬 영상·이미지 콘텐츠 제작", val: 2 },
+        { label: "🤖 아예 AI 직원을 두고 싶다", val: 4 },
+      ],
+    },
+    {
+      q: "PC(노트북) 사용은 어떤가요?",
+      options: [
+        { label: "💻 거의 안 씁니다", val: 1 },
+        { label: "📝 워드·엑셀 기본은 합니다", val: 2 },
+        { label: "🌐 인터넷·이메일 잘 씁니다", val: 3 },
+        { label: "⚙️ 새 프로그램 설치도 능숙합니다", val: 4 },
+      ],
+    },
+  ];
+
+  const RESULTS = {
+    1: { level: "Level 1", emoji: "🌱", title: "무료 체험부터 시작하세요!", desc: "아직 AI가 낯설어도 괜찮습니다. Level 1 무료 체험에서 강사와 함께 처음부터 차근차근 세팅해 드립니다.", color: "emerald", price: "무료" },
+    2: { level: "Level 1 → 2", emoji: "📱", title: "핸드폰 패키지 추천!", desc: "스마트폰은 익숙하시죠? Level 1 무료 체험 후 Level 2로 홍보·영상·서류 자동화까지 바로 연결하세요.", color: "blue", price: "99,000원" },
+    3: { level: "Level 1 → 3", emoji: "💻", title: "핸드폰+PC 패키지 추천!", desc: "PC까지 활용하시면 문서·보고서 자동화 파이프라인 구축이 가능합니다. 야근이 없어집니다.", color: "indigo", price: "179,000원" },
+    4: { level: "Level 1 → 4", emoji: "🤖", title: "전체 완성 패키지 추천!", desc: "Gemini Gems 챗봇부터 홈페이지·숏폼 채널까지. AI가 진짜 직원이 되는 레벨입니다.", color: "violet", price: "349,000원" },
+  };
+
+  const handleAnswer = (val) => {
+    const next = [...answers, val];
+    setAnswers(next);
+    if (next.length === questions.length) {
+      const avg = Math.round(next.reduce((a, b) => a + b, 0) / next.length);
+      setResult(RESULTS[Math.max(1, Math.min(4, avg))]);
+      setStep(questions.length);
+    } else {
+      setStep(next.length);
+    }
+  };
+
+  const reset = () => { setStep(0); setAnswers([]); setResult(null); };
+
+  const cMap = {
+    emerald: { border: "border-emerald-300", bg: "bg-emerald-50", text: "text-emerald-700", btn: "bg-emerald-500" },
+    blue:    { border: "border-blue-300",    bg: "bg-blue-50",    text: "text-blue-700",    btn: "bg-blue-500" },
+    indigo:  { border: "border-indigo-300",  bg: "bg-indigo-50",  text: "text-indigo-700",  btn: "bg-indigo-500" },
+    violet:  { border: "border-violet-300",  bg: "bg-violet-50",  text: "text-violet-700",  btn: "bg-violet-500" },
+  };
+
+  return (
+    <section className="py-16 sm:py-20 px-5 bg-white rounded-[2rem] sm:rounded-[3rem] shadow-xl relative z-10">
+      <div className="max-w-lg mx-auto">
+        <FadeIn>
+          <div className="text-center mb-8">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-600 text-xs font-bold tracking-widest uppercase mb-5">Level Quiz</span>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-800 leading-tight">
+              <span className="block">나에게 맞는 레벨은?</span>
+              <span className="block bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">3문제로 바로 확인</span>
+            </h2>
+          </div>
+        </FadeIn>
+
+        {/* Progress */}
+        {step < questions.length && (
+          <div className="flex gap-1.5 mb-6">
+            {questions.map((_, i) => (
+              <div key={i} className={`flex-1 h-1.5 rounded-full transition-all duration-500 ${i < step ? "bg-blue-500" : i === step ? "bg-blue-300" : "bg-slate-200"}`} />
+            ))}
+          </div>
+        )}
+
+        {/* Question */}
+        {step < questions.length && (
+          <FadeIn key={step}>
+            <div className="bg-slate-50 rounded-3xl p-6 sm:p-8 border border-slate-200/60">
+              <p className="text-xs font-black text-slate-400 tracking-widest uppercase mb-3">Question {step + 1} / {questions.length}</p>
+              <h3 className="text-base sm:text-lg font-black text-slate-800 mb-5 leading-snug">{questions[step].q}</h3>
+              <div className="space-y-2.5">
+                {questions[step].options.map((opt, i) => (
+                  <button key={i} onClick={() => handleAnswer(opt.val)}
+                    className="w-full text-left px-4 py-3.5 rounded-2xl bg-white border-2 border-slate-200 text-sm font-bold text-slate-700 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200 active:scale-[0.98]">
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </FadeIn>
+        )}
+
+        {/* Result */}
+        {result && (
+          <FadeIn>
+            <div className={`rounded-3xl border-2 p-6 sm:p-8 ${cMap[result.color].border} ${cMap[result.color].bg}`}>
+              <div className="text-center mb-5">
+                <span className="text-5xl block mb-3">{result.emoji}</span>
+                <div className={`text-xs font-black tracking-widest uppercase mb-2 ${cMap[result.color].text}`}>{result.level}</div>
+                <h3 className="text-lg sm:text-xl font-black text-slate-800 mb-3">{result.title}</h3>
+                <p className="text-sm text-slate-600 font-medium leading-relaxed">{result.desc}</p>
+              </div>
+              <div className="flex items-center justify-center gap-2 py-3 rounded-2xl bg-white/80 border border-white mb-4">
+                <span className="text-xs text-slate-500 font-medium">추천 패키지 가격</span>
+                <span className={`text-lg font-black ${cMap[result.color].text}`}>{result.price}</span>
+              </div>
+              <div className="flex gap-2">
+                <MagBtn href="#apply" variant="primary" size="sm" className="flex-1 justify-center">지금 신청하기</MagBtn>
+                <button onClick={reset} className="px-4 py-2.5 rounded-xl border-2 border-slate-200 bg-white text-slate-500 text-sm font-bold hover:border-slate-300 transition-colors">다시하기</button>
+              </div>
+            </div>
+          </FadeIn>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
    NAV — 모바일 최적화
    ═══════════════════════════════════════════════════════════════ */
 function NavBar() {
@@ -693,9 +1395,12 @@ function NavBar() {
           <Image src="/logo.png" alt="LEADERS AI LABS 로고" width={160} height={40} className="h-7 sm:h-8 w-auto object-contain hover:opacity-80 transition-opacity" priority />
           <span className="hidden sm:inline-block px-2.5 py-1 rounded-lg bg-blue-100 border border-blue-200 text-blue-700 text-[10px] font-bold">1기 모집중</span>
         </a>
-        <MagBtn href="#apply" variant="primary" size="sm" className="text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2.5">
-          신청하기
-        </MagBtn>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <a href="#pricing" className="hidden sm:inline-block text-sm font-bold text-slate-500 hover:text-blue-600 transition-colors">수강료</a>
+          <MagBtn href="#apply" variant="primary" size="sm" className="text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2.5">
+            신청하기
+          </MagBtn>
+        </div>
       </div>
     </nav>
   );
@@ -797,10 +1502,13 @@ export default function LeadersAILabs() {
       <HeroSection />
       <TrustBar />
       <BeforeAfterSection />
+      <InstructorSection />
       <CurriculumSection />
+      <LevelQuizSection />
       <ProcessSection />
       <GallerySection />
       <CommunitySection />
+      <PricingSection />
       <ApplicationSection />
       <FloatingCTA />
 
