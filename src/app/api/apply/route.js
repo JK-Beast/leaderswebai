@@ -3,7 +3,7 @@ import { Redis } from "@upstash/redis";
 import nodemailer from "nodemailer";
 
 const TOTAL_SEATS = 100;
-const BASE_COUNT = 26; // 시스템 도입 이전 수기 집계 인원
+const BASE_COUNT = 31; // 시스템 도입 이전 수기 집계 인원
 
 async function sendEmail(applicant, currentCount) {
   const user = process.env.EMAIL_USER;

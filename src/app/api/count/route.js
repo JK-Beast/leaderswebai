@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { Redis } from "@upstash/redis";
 
 const TOTAL_SEATS = 100;
-const BASE_COUNT = 26; // 시스템 도입 이전 수기 집계 인원
+const BASE_COUNT = 31; // 시스템 도입 이전 수기 집계 인원
 
 export async function GET() {
   try {
