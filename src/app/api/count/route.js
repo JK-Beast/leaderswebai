@@ -1,47 +1,17 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-
-// Vercel, Netlify 등 서버리스 환경에서는 /tmp만 쓰기 가능합니다.
-const IS_SERVERLESS = process.env.VERCEL === "1" || !!process.env.VERCEL || process.env.NETLIFY === "true" || !!process.env.NETLIFY || !!process.env.AWS_REGION;
-const LOCAL_DATA_PATH = path.join(process.cwd(), "data", "applicants.json");
-const TMP_DATA_PATH = "/tmp/applicants.json";
-const DATA_PATH = IS_SERVERLESS ? TMP_DATA_PATH : LOCAL_DATA_PATH;
+import { Redis } from "@upstash/redis";
 
 const TOTAL_SEATS = 100;
-const BASE_COUNT = 26;
-
-function readApplicants() {
-  try {
-    let applicants = [];
-    // 서버리스 환경: /tmp에 파일이 없으면 프로젝트 data 폴더에서 초기 데이터 복사
-    if (IS_SERVERLESS && !fs.existsSync(TMP_DATA_PATH)) {
-      try {
-        const seed = fs.readFileSync(LOCAL_DATA_PATH, "utf-8");
-        fs.writeFileSync(TMP_DATA_PATH, seed, "utf-8");
-        applicants = JSON.parse(seed);
-      } catch {
-        fs.writeFileSync(TMP_DATA_PATH, "[]", "utf-8");
-      }
-    } else {
-      const raw = fs.readFileSync(DATA_PATH, "utf-8");
-      applicants = JSON.parse(raw);
-    }
-    
-    if (!Array.isArray(applicants)) applicants = [];
-    
-    // 실제 데이터가 BASE_COUNT보다 적으면 BASE_COUNT로 강제 고정 (UI 표시용)
-    if (applicants.length < BASE_COUNT) {
-      return Array(BASE_COUNT).fill({ name: "Manual", role: "Sync", phone: "000", task: "Base" });
-    }
-    
-    return applicants;
-  } catch {
-    return Array(BASE_COUNT).fill({ name: "Manual", role: "Sync", phone: "000", task: "Base" });
-  }
-}
+const BASE_COUNT = 26; // 시스템 도입 이전 수기 집계 인원
 
 export async function GET() {
-  const applicants = readApplicants();
-  return NextResponse.json({ count: applicants.length, total: TOTAL_SEATS });
+  try {
+    const redis = Redis.fromEnv();
+    const count = await redis.llen("applicants");
+    return NextResponse.json({ count: count + BASE_COUNT, total: TOTAL_SEATS });
+  } catch (err) {
+    console.error("count 조회 오류:", err.message);
+    // Redis 미설정 또는 오류 시 BASE_COUNT 반환
+    return NextResponse.json({ count: BASE_COUNT, total: TOTAL_SEATS });
+  }
 }
