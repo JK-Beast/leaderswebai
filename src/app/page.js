@@ -128,11 +128,11 @@ function HeroSection() {
         <p className="mt-5 sm:mt-6 max-w-xl mx-auto text-sm sm:text-base text-slate-500 leading-[1.7] font-medium px-2" style={mk(0.25)}>
           코딩 필요 없습니다.
           <br className="sm:hidden" />{" "}
-          <strong className="text-slate-700">Gemini + Workflow</strong> 기반으로
+          <strong className="text-slate-700">ChatGPT · Claude 등 LLM</strong>과
           <br />
-          <strong className="text-slate-700">내 스마트폰, 내 노트북</strong>에
+          <strong className="text-slate-700">생성형 AI</strong>를 활용해
           <br className="sm:hidden" />{" "}
-          당장 내일 쓸 AI 환경을 세팅해 드립니다.
+          반복 업무를 자동화하고 하루 1시간을 되찾습니다.
         </p>
 
         {/* Beginner Callout */}
@@ -147,9 +147,9 @@ function HeroSection() {
         {/* What we'll do - Interactive Cards */}
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3" style={mk(0.4)}>
           {[
-            { icon: "📱", title: "스마트폰 AI 세팅", desc: "Gemini 음성 비서를 내 폰에 직접 설치" },
-            { icon: "📂", title: "업무 자동화 구축", desc: "반복 문서 작업을 Workflow로 10분 컷" },
-            { icon: "🎯", title: "마케팅 콘텐츠 생성", desc: "릴스·카피·이미지를 AI로 즉시 제작" },
+            { icon: "🧠", title: "LLM 업무 자동화", desc: "ChatGPT·Claude로 보고서·PPT·이메일을 10분 안에 완성" },
+            { icon: "⌨️", title: "CLI 기반 PC 자동화", desc: "PowerShell + AI로 반복 파일 작업을 명령어 한 줄로 처리" },
+            { icon: "🤖", title: "AI 에이전트 구축", desc: "Make.com + LLM으로 24시간 자동으로 일하는 업무 시스템" },
           ].map((item, i) => (
             <div key={i} className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/60 p-5 text-left hover:border-blue-300 hover:shadow-lg hover:shadow-blue-100/50 hover:-translate-y-1 transition-all duration-300 cursor-default">
               <span className="text-2xl block mb-3">{item.icon}</span>
