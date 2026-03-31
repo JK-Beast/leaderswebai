@@ -542,64 +542,79 @@ function CurriculumSection() {
   const [openIdx, setOpenIdx] = useState(0);
   const tracks = [
     {
-      icon: "🌱", tag: "Level 1 · 무료", title: "AI 첫 만남 — 2시간 40분 체험",
-      desc: "코딩·IT 지식 불필요. 강사가 옆에서 직접 세팅하며 내 업무에 바로 쓸 수 있는 AI 환경을 만듭니다.",
+      icon: "🖥️", tag: "Level 0 · 무료", title: "디지털 업무 환경 구축",
+      desc: "AI를 쓰기 전에 내 PC부터 정돈합니다. Windows 파일 구조 정리부터 Chrome AI 작업대 세팅까지 — 이후 모든 수업의 출발점.",
       modules: [
-        { label: "특강 · 20분",       title: "2026 이후 기술의 발전 방향과 속도",    desc: "알파고→ChatGPT→2026 멀티모달까지 흐름 정리. 내 사업·직업에 AI가 미치는 영향" },
-        { label: "브리핑 · 20분",     title: "실무자들이 AI를 쓰는 현황",            desc: "소상공인·직장인이 실제 없앤 반복 업무 사례. 막연한 이론이 아닌 현장 이야기" },
-        { label: "라이브 시연 · 20분", title: "지금 바로 보여드리는 AI 활용 4장면",  desc: "카메라→홍보문구 / 말→캘린더 자동 등록 / 엑셀 표 자동 생성 / AI 이미지 완성" },
-        { label: "이론+실습 · 25분",  title: "프롬프팅 황금 공식 3단계",             desc: "[역할]+[상황]+[원하는 결과]. 내 업종으로 직접 프롬프트 1개 완성" },
-        { label: "핸드폰 실습 · 40분", title: "Gemini 앱 설치 & 첫 실습",           desc: "설치 → 프롬프트 작성 → 카카오·문자에 결과물 바로 붙여넣기" },
-        { label: "PC 실습 · 30분",    title: "gemini.google.com 기본 동작 체득",     desc: "접속 → 복사·붙여넣기 익히기. 핸드폰과 PC 차이 직접 비교" },
+        { label: "실습 1", title: "Windows 폴더·파일 구조 정리", desc: "업무용 폴더 체계 설계 & 바탕화면 정리. AI를 올려놓을 깨끗한 환경 만들기" },
+        { label: "실습 2", title: "CLI 개념 소개", desc: "터미널(CMD/PowerShell)이 무엇인지, 왜 쓰는지. 개념 이해 — 실습은 Level 3" },
+        { label: "실습 3", title: "Chrome AI 작업대 구축", desc: "ChatGPT·Claude·Gemini 즐겨찾기 등록. 화면 분할 고정 (좌=문서, 우=AI)" },
+        { label: "실습 4", title: "첫 AI 자동화 체험", desc: "LLM에게 '이 폴더 정리 명령어 짜줘' → 복사·실행. AI가 일한다는 것을 체감" },
       ],
-      badge: "FREE · 2시간 40분",
+      badge: "FREE · 2시간",
+      badgeColor: "bg-slate-100 text-slate-700",
+      color: "slate",
+    },
+    {
+      icon: "🌱", tag: "Level 1+2 · 무료", title: "생성형 AI 업무 적용 기초",
+      desc: "ChatGPT·Claude 첫 실습. 당일 결과물 2개를 손에 쥐고 돌아갑니다. 툴이 달라져도 통하는 AI 프롬프트 사고법을 익힙니다.",
+      modules: [
+        { label: "이론 · 30분",  title: "AI 프롬프트 설계 방법론", desc: "3단계 황금 공식 — [역할]+[상황]+[원하는 결과]. ChatGPT·Claude 어디서나 동일 적용" },
+        { label: "실습 · 45분",  title: "LLM 문서 업무 활용", desc: "Word 파일 업로드 → 보고서 초안 자동 생성·수정. 내 업종 문서로 직접 실습" },
+        { label: "실습 · 30분",  title: "생성형 AI 이미지·배너 제작", desc: "업종별 홍보 이미지 1장 완성. Gemini Imagen 활용, 핸드폰·PC 모두 가능" },
+        { label: "루틴 · 15분",  title: "AI 작업대 활용 루틴 체득", desc: "Chrome 작업대 여는 방법 고정. 이 루틴이 이후 모든 수업의 시작" },
+      ],
+      badge: "FREE · 2시간",
       badgeColor: "bg-emerald-100 text-emerald-700",
       color: "emerald",
     },
     {
-      icon: "📣", tag: "Level 2 · AI 마케팅 실전", title: "스마트폰 AI 마케팅 완전 정복",
-      desc: "디자이너·카피라이터·영상팀 없이 스마트폰 하나로 SNS 마케팅을 자동화합니다. 소상공인·1인 브랜드 맞춤 실전 과정.",
+      icon: "⌨️", tag: "Level 3 · CLI + 사무 자동화", title: "CLI 활용 · LLM 기반 사무 자동화",
+      desc: "직장인 고통 지점 TOP5를 직접 해결합니다. PPT 2.4시간→20분, 회의록 자동화, 이메일 초안, PowerShell 파일 자동화까지.",
       modules: [
-        { label: "모듈 2", title: "AI 카피라이팅 & 홍보 콘텐츠",  desc: "SNS 캡션·카카오 공지·블로그 초안을 업종별 프롬프트 10종으로 즉시 완성" },
-        { label: "모듈 3", title: "Gemini Imagen 이미지·배너 제작", desc: "상품 사진→홍보 포스터 즉시 생성. 배경 제거·AI 보정까지 핸드폰 완결" },
-        { label: "모듈 4", title: "AI 숏폼 마케팅 영상 (Vrew)",    desc: "Gemini 대본→Imagen 이미지→Vrew 자막. 촬영 없이 1분 릴스·쇼츠 완성" },
-        { label: "모듈 5", title: "서류·정산 자동화",               desc: "영수증·계약서 사진→문서 즉시 변환. 정산·견적서 작성 시간 90% 단축" },
+        { label: "모듈 A", title: "PPT 자동 생성", desc: "감마(Gamma) + LLM 조합. 기획안 텍스트 → 완성 PPT. 2.4시간짜리 작업을 20분으로" },
+        { label: "모듈 B", title: "보고서·회의록·이메일 자동화", desc: "Word 업로드→구조화·수정, 녹취→액션아이템 추출, 상황 설명→격식체 이메일 초안" },
+        { label: "모듈 C", title: "LLM 프롬프트 라이브러리 구축", desc: "내 업종 반복 업무 프롬프트 저장소 제작. 다음 달부터 복사·붙여넣기만" },
+        { label: "모듈 D", title: "PowerShell CLI 실전", desc: "파일 일괄 이름 변경, 폴더 자동 생성, 텍스트 일괄 처리. LLM이 스크립트 생성" },
+        { label: "모듈 E", title: "LLM + CLI 연동 심화", desc: "'이런 작업 자동화해줘' 프롬프트 → LLM이 PowerShell 스크립트 생성 → 실행" },
+        { label: "모듈 F", title: "Gemini CLI 입문", desc: "터미널에서 Gemini AI 직접 호출. 반복 질의 자동화, CLI 환경에서 AI 활용법" },
       ],
-      badge: "4모듈 · 12시간",
+      badge: "6모듈 · 12시간",
       badgeColor: "bg-blue-100 text-blue-700",
       color: "blue",
     },
     {
-      icon: "💻", tag: "Level 3 · PC 완전 정복", title: "노트북으로 문서·콘텐츠 자동화",
-      desc: "PC와 Gemini CLI를 연결해 반복 문서와 콘텐츠 생산을 자동화합니다. 회사원·강사·1인 사업자의 야근을 없애드립니다.",
+      icon: "🤖", tag: "Level 4 · AI 에이전트 시스템", title: "AI 에이전트 기반 업무 시스템 구축",
+      desc: "2026 에이전틱 AI 트렌드를 실무에 적용합니다. 계획·실행·점검을 자동화하는 AI 직원 시스템을 직접 만듭니다.",
       modules: [
-        { label: "모듈 6", title: "PC 기초 + Gemini CLI 입문",     desc: "폴더 구조 세팅 & Gemini CLI 환경 구축. 처음 PC 세팅도 강사가 직접" },
-        { label: "모듈 7", title: "문서·보고서 자동화",             desc: "회의록·기획서·주간보고 초안을 AI가 대신 작성. 반복 문서 10분 컷" },
-        { label: "모듈 8", title: "콘텐츠 자동 생산 파이프라인",   desc: "블로그·뉴스레터·SNS 포스팅 자동화 루틴 구축. 매주 콘텐츠 고민 해방" },
+        { label: "모듈 G~H", title: "맞춤형 LLM 에이전트 제작", desc: "업종별 24시간 응대·FAQ·견적 자동화 챗봇. 시스템 프롬프트 설계, 오답 방지 최적화" },
+        { label: "모듈 I",   title: "Google Apps Script 자동화", desc: "LLM이 코드 생성, 수강생은 붙여넣고 실행. 반복 구글 시트·이메일 작업 자동화" },
+        { label: "모듈 J~K", title: "Make.com 노코드 워크플로우", desc: "이메일 수신→LLM 분류→시트 기록→자동 회신 파이프라인. Office·Gmail·Drive 연결" },
+        { label: "모듈 L~M", title: "AI 기반 홈페이지·브랜딩 제작", desc: "코딩 없이 비즈니스 랜딩 페이지 완성. AI로 로고·배너·SNS 템플릿 일괄 제작" },
       ],
-      badge: "3모듈 · 9시간",
-      badgeColor: "bg-indigo-100 text-indigo-700",
-      color: "indigo",
-    },
-    {
-      icon: "🤖", tag: "Level 4 · AI 직원 완성", title: "나만의 AI 직원 직접 만들기",
-      desc: "챗봇·홈페이지·숏폼 채널·CLI 자동화까지. 이 레벨이 끝나면 AI가 진짜 내 직원이 됩니다.",
-      modules: [
-        { label: "모듈 9~10",  title: "Gemini Gems 맞춤 챗봇 제작",  desc: "업종·말투에 맞는 AI 상담봇. 24시간 고객 응대·FAQ 자동 처리" },
-        { label: "모듈 11~12", title: "AI로 홈페이지 제작",           desc: "코딩 없이 비즈니스 페이지 완성. 수정·디자인 변경도 말로" },
-        { label: "모듈 13",    title: "CLI 자동화 심화",              desc: "파일·메일·일정을 명령어 한 줄로. 매일 반복 PC 작업 자동화" },
-        { label: "모듈 14~15", title: "숏폼 채널 개설 & 자동화",     desc: "기획→편집→업로드 루틴 자동화. AI 콘텐츠 캘린더 시스템 완성" },
-      ],
-      badge: "7모듈 · 21시간",
+      badge: "7모듈 · 18시간",
       badgeColor: "bg-violet-100 text-violet-700",
       color: "violet",
     },
+    {
+      icon: "🚀", tag: "Level 5 · AI 개발 환경", title: "AI 에이전트 개발 환경 입문 (Google Antigravity)",
+      desc: "바이브코딩(Vibe Coding)으로 나만의 자동화 도구를 직접 만듭니다. 코딩 지식 없이도 LLM이 코드를 생성하고 실행합니다.",
+      modules: [
+        { label: "모듈 N", title: "Google Antigravity 설치 & 환경 세팅", desc: "VS Code 기반 AI IDE 설치. Gemini 3 Pro 탑재, Windows 무료. AI 작업대 최종 통합" },
+        { label: "모듈 O", title: "바이브코딩 입문", desc: "자연어 명령 → LLM이 코드 생성·실행. '이 업무 자동화해줘' 한 문장으로 도구 제작" },
+        { label: "모듈 P~Q", title: "본인 업무 맞춤 자동화 도구 제작", desc: "Level 0~4에서 배운 모든 내용 통합. 내 업무에 맞는 자동화 도구 1개 완성" },
+      ],
+      badge: "3모듈 · 심화",
+      badgeColor: "bg-orange-100 text-orange-700",
+      color: "orange",
+    },
   ];
   const cMap = {
+    slate:   { bg: "bg-slate-500",   light: "bg-slate-50",   border: "border-slate-200",   text: "text-slate-600",   tag: "bg-slate-100 text-slate-700" },
     emerald: { bg: "bg-emerald-500", light: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-600", tag: "bg-emerald-100 text-emerald-700" },
     blue:    { bg: "bg-blue-500",    light: "bg-blue-50",    border: "border-blue-200",    text: "text-blue-600",    tag: "bg-blue-100 text-blue-700" },
     indigo:  { bg: "bg-indigo-500",  light: "bg-indigo-50",  border: "border-indigo-200",  text: "text-indigo-600",  tag: "bg-indigo-100 text-indigo-700" },
     violet:  { bg: "bg-violet-500",  light: "bg-violet-50",  border: "border-violet-200",  text: "text-violet-600",  tag: "bg-violet-100 text-violet-700" },
+    orange:  { bg: "bg-orange-500",  light: "bg-orange-50",  border: "border-orange-200",  text: "text-orange-600",  tag: "bg-orange-100 text-orange-700" },
   };
 
   return (
@@ -611,14 +626,14 @@ function CurriculumSection() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 leading-tight tracking-tight">
               <span className="block">어설픈 강의가 아닙니다.</span>
               <span className="block bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                내 기기에 직접 세팅합니다.
+                내 업무에 직접 세팅합니다.
               </span>
             </h2>
             <p className="text-slate-500 mt-4 text-sm sm:text-base font-medium leading-relaxed">
               수업을 듣고 돌아가는 게 아닙니다.
               <br />
-              교육이 끝나면 <strong className="text-slate-700">내 폰, 내 노트북</strong>에
-              <br className="sm:hidden" />{" "}AI 도구가 세팅되어 있습니다.
+              교육이 끝나면 <strong className="text-slate-700">내 PC</strong>에
+              <br className="sm:hidden" />{" "}LLM 기반 업무 자동화 환경이 구축되어 있습니다.
             </p>
           </div>
         </FadeIn>
