@@ -180,9 +180,9 @@ function HeroSection() {
    ═══════════════════════════════════════════════════════════════ */
 function TrustBar() {
   const items = [
-    "📱 스마트폰 AI 비서", "⚡ 10분 Workflow", "🔰 코딩 제로",
-    "📂 문서 자동 요약", "🎯 릴스 자동 기획", "✍️ AI 카피라이팅",
-    "🏢 기업 DX 맞춤", "📊 데이터 분석", "🎬 콘텐츠 자동화",
+    "🧠 LLM 업무 자동화", "⌨️ CLI 파일 자동화", "🔰 코딩 제로",
+    "📂 문서 자동 생성", "📊 PPT 자동 완성", "✍️ AI 카피라이팅",
+    "🤖 AI 에이전트 구축", "📧 이메일 초안 자동화", "🎯 회의록 자동 요약",
   ];
   return (
     <div className="py-4 border-y border-slate-200/40 bg-white/40 backdrop-blur-sm overflow-hidden relative z-20">
@@ -219,9 +219,9 @@ function BeforeAfterSection() {
       emoji: "🚀",
       title: "리더스 AI랩 이후의 하루",
       items: [
-        { icon: "⚡", text: "반복 업무는 Workflow가 자동 처리" },
-        { icon: "🤖", text: "Gemini에게 말하면 문서 요약 완료" },
-        { icon: "🎯", text: "릴스·카피·이미지를 AI가 즉시 생성" },
+        { icon: "⚡", text: "반복 업무는 LLM이 10분 안에 처리" },
+        { icon: "🤖", text: "AI에게 말하면 문서·PPT 요약 완료" },
+        { icon: "🎯", text: "보고서·카피·이미지를 AI가 즉시 생성" },
         { icon: "☀️", text: "퇴근 1시간 전, 오늘 할 일 끝" },
       ],
       color: "blue",
