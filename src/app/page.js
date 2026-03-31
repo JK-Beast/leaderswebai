@@ -1538,7 +1538,7 @@ export default function LeadersAILabs() {
             <Image src="/logo.png" alt="LEADERS AI LABS 로고" width={180} height={45} className="h-8 w-auto object-contain brightness-0 invert mb-3 hover:opacity-80 transition-opacity" />
           </a>
           <p className="text-sm text-slate-500 mb-1">대전광역시 중구 대종로 417-1번지</p>
-          <p className="text-xs text-slate-600">AI(DX)교육 전문 · Gemini + Workflow 기반</p>
+          <p className="text-xs text-slate-600">AI(DX)교육 전문 · LLM 기반 사무 업무 자동화 전문 교육기관</p>
           <div className="w-12 h-px bg-slate-700 my-4" />
           <p className="text-xs text-slate-600">© 2025 LEADERS AI LABS. All rights reserved.</p>
         </div>
