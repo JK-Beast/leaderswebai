@@ -1710,11 +1710,21 @@ function LevelQuizSection() {
 function TeamsBar() {
   const cfg = useCfg();
   const teams = cfg.teams;
+  const [liveCount, setLiveCount] = useState(null);
+
+  useEffect(() => {
+    fetch("/api/count")
+      .then((r) => r.json())
+      .then((d) => setLiveCount(d.count))
+      .catch(() => {});
+  }, []);
+
   if (!teams) return null;
   return (
     <div className="w-full max-w-xl mx-auto grid grid-cols-2 gap-3 sm:gap-4">
       {teams.map((t, i) => {
         const isClosed = t.status === "closed";
+        const filledCount = (!isClosed && liveCount !== null) ? liveCount : t.seatFilled;
         return (
           <div key={i} className={`rounded-3xl border-2 p-5 flex flex-col gap-3 ${isClosed ? "bg-rose-50/80 border-rose-200" : "bg-gradient-to-br from-blue-50 to-indigo-50/60 border-blue-200 shadow-lg shadow-blue-100/60"}`}>
             <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[11px] font-black w-fit ${isClosed ? "bg-rose-100 border-rose-200 text-rose-600" : "bg-emerald-100 border-emerald-200 text-emerald-700"}`}>
@@ -1725,7 +1735,7 @@ function TeamsBar() {
               <h3 className={`text-base font-black leading-snug ${isClosed ? "text-slate-500" : "text-slate-800"}`}>{t.name}</h3>
               <p className="text-xs text-slate-500 font-medium mt-0.5">{t.region}</p>
               <p className={`text-xs font-bold mt-1 ${isClosed ? "text-rose-500" : "text-blue-600"}`}>
-                {isClosed ? `${t.seatFilled}명 합류 완료` : `현재 ${t.seatFilled}/${t.seatTotal}명`}
+                {isClosed ? `${filledCount}명 합류 완료` : `현재 ${filledCount}/${t.seatTotal}명`}
               </p>
             </div>
             {isClosed ? (
