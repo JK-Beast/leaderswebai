@@ -3,7 +3,9 @@ import { Redis } from "@upstash/redis";
 import nodemailer from "nodemailer";
 
 const TOTAL_SEATS = 100;
-const BASE_COUNT = 31; // 시스템 도입 이전 수기 집계 인원
+const BASE_COUNT = 0;
+const REDIS_KEY_LIST  = "chungnam_applicants";
+const REDIS_KEY_PHONES = "chungnam_phones";
 
 async function sendEmail(applicant, currentCount) {
   const user = process.env.EMAIL_USER;
@@ -26,7 +28,7 @@ async function sendEmail(applicant, currentCount) {
   const info = await transporter.sendMail({
     from: `"LEADERS AI LABS" <${user}>`,
     to,
-    subject: `🚀 [새 신청] ${applicant.name}님이 1기에 신청했습니다! (${currentCount}/${TOTAL_SEATS}명)`,
+    subject: `🚀 [충남 1기 신청] ${applicant.name}님이 신청했습니다! (${currentCount}/${TOTAL_SEATS}명)`,
     html: `
       <div style="font-family:'Pretendard',sans-serif;max-width:520px;margin:0 auto;padding:32px;background:#f8faff;border-radius:16px;">
         <h2 style="color:#1e293b;margin-bottom:24px;">🎉 새로운 1기 신청이 접수되었습니다</h2>
@@ -62,35 +64,29 @@ export async function POST(request) {
     const redis = Redis.fromEnv();
 
     // 중복 체크 (연락처 기준)
-    const isDuplicate = await redis.sismember("applicant_phones", phone);
+    const isDuplicate = await redis.sismember(REDIS_KEY_PHONES, phone);
     if (isDuplicate) {
-      const count = await redis.llen("applicants");
+      const count = await redis.llen(REDIS_KEY_LIST);
       return NextResponse.json({ error: "이미 신청된 연락처입니다.", count: count + BASE_COUNT }, { status: 409 });
     }
 
     // 정원 초과 체크
-    const currentLen = await redis.llen("applicants");
+    const currentLen = await redis.llen(REDIS_KEY_LIST);
     if (currentLen + BASE_COUNT >= TOTAL_SEATS) {
       return NextResponse.json({ error: "모집이 마감되었습니다.", count: currentLen + BASE_COUNT }, { status: 410 });
     }
 
     // Redis에 저장 (원자적)
     const newApplicant = { name, role, phone, task, date: new Date().toISOString() };
-    await redis.lpush("applicants", JSON.stringify(newApplicant));
-    await redis.sadd("applicant_phones", phone);
+    await redis.lpush(REDIS_KEY_LIST, JSON.stringify(newApplicant));
+    await redis.sadd(REDIS_KEY_PHONES, phone);
 
     const newCount = currentLen + 1 + BASE_COUNT;
 
-    // 이메일 알림
-    try {
-      await sendEmail(newApplicant, newCount);
-    } catch (err) {
-      console.error("이메일 발송 실패:", err.message);
-      return NextResponse.json(
-        { error: `이메일 발송 오류: ${err.message}` },
-        { status: 500 }
-      );
-    }
+    // 이메일 알림 (실패해도 신청은 완료 처리)
+    sendEmail(newApplicant, newCount).catch((err) =>
+      console.error("이메일 발송 실패:", err.message)
+    );
 
     return NextResponse.json({
       success: true,
